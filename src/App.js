@@ -1,6 +1,25 @@
 import React from 'react';
 import logo from './logo.svg';
-import './App.css';
+import { ApolloClient, gql, HttpLink, InMemoryCache } from '@apollo/client'
+
+const client = new ApolloClient({
+  cache: new InMemoryCache(),
+  link: new HttpLink({
+    uri: 'https://48p1r2roz4.sse.codesandbox.io'
+  })
+})
+
+client
+  .query({
+    query: gql`
+      {
+        rates(currency: "USD") {
+          currency
+        }
+      }
+    `
+  })
+  .then(result => console.log(result))
 
 function App() {
   return (
