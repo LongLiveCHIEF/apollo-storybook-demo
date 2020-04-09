@@ -3,11 +3,10 @@ import logo from './logo.svg';
 import { 
   ApolloClient, 
   ApolloProvider,
-  gql, 
   HttpLink, 
   InMemoryCache,
-  useQuery
 } from '@apollo/client'
+import ExchangeRates from './components/ExchangeRates'
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
@@ -16,27 +15,6 @@ const client = new ApolloClient({
   })
 })
 
-const EXCHANGE_RATES = gql`
-  {
-    rates(currency: "USD") {
-      currency
-      rate
-    }
-  }
-`
-function ExchangeRates() {
-  const { loading, error, data } = useQuery(EXCHANGE_RATES)
-
-  if (loading) return <p>Loading...</p>
-  if (error) return <p>error...</p>
-  return data.rates.map(({ currency, rate }) => (
-    <div key={currency}>
-      <p>
-        {currency}: {rate}
-      </p>
-    </div>
-  ))
-}
 function App() {
   return (
     <ApolloProvider client={client}>
