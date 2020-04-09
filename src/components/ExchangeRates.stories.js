@@ -4,4 +4,4 @@ import AppProvider from '../apollo/apolloClient'
 
 export default { title: 'ExchangeRates'}
 
-export const withTest = () => <AppProvider><ExchangeRates /></AppProvider>
+export const withTest = () => <ExchangeRates />
